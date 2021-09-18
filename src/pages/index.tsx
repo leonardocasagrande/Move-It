@@ -51,19 +51,14 @@ export default function Home(props: HomeProps) {
 
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  let url = 'https://www.instagram.com/'
-  const userName = 'bru.vernizi';
-  url = `${url}${userName}/?__a=1`;
-  const res = await fetch(url);
-  const data = await res.json();
   const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
   return {
     props: {
-      fullName: data.graphql.user.full_name,
-      profilePicUrl: data.graphql.user.profile_pic_url,
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted)
+      fullName: 'Leonardo Casagrande',
+      profilePicUrl: 'https://github.com/leonardocasagrande.png',
+      level: !!level ? Number(level) : 0,
+      currentExperience: !!currentExperience ? Number(currentExperience) : 0,
+      challengesCompleted: !!challengesCompleted ? Number(challengesCompleted) : 0
     }
   }
 }
